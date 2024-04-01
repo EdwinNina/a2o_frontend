@@ -1,13 +1,22 @@
 <script setup>
 import { ref } from 'vue'
+import { useProblems } from '@/composables/useProblems';
 const form = ref('')
+const result = ref('')
 const errorMessage = ref('')
+const { errorMessage: errorProblem, getProblemTwoResult } = useProblems()
 
-const process = () => {
+const process = async () => {
    if (!form.value) {
       errorMessage.value = 'The value is required'
       return
    }
+   const response = await getProblemTwoResult(form.value)
+
+   if (errorProblem.value) {
+      alert(errorProblem.value)
+   }
+   result.value = response
    errorMessage.value = ''
    form.value = ''
 }
@@ -16,8 +25,8 @@ const process = () => {
 <template>
    <div class="container grid grid-cols-2 gap-10">
       <div>
-         <label for="message" class="block mb-2 text-sm font-medium text-gray-900">Chess parameters</label>
-         <textarea id="input-1" rows="4"
+         <label for="message" class="block mb-2 text-sm font-medium text-gray-900">String Value Parameters</label>
+         <textarea id="input-2" rows="4"
             class="block p-2.5 w-full text-md  bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
             :class="{ 'border-red-500': errorMessage }" placeholder="Please enter a chess values..."
             v-model="form"></textarea>
@@ -29,7 +38,7 @@ const process = () => {
       </div>
       <div>
          <h2 class="text-md font-medium text-gray-900">Result</h2>
-         <pre id="output-1"></pre>
+         <pre id="output-2">{{ result }}</pre>
       </div>
    </div>
 </template>

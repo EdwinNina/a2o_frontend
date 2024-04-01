@@ -16,7 +16,7 @@ const process = () => {
 <template>
    <div class="container grid grid-cols-2 gap-10">
       <div>
-         <label for="message" class="block mb-2 text-sm font-medium text-gray-900">String Value Parameters</label>
+         <label for="message" class="block mb-2 text-sm font-medium text-gray-900">Chess parameters</label>
          <textarea id="input-1" rows="4"
             class="block p-2.5 w-full text-md  bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
             :class="{ 'border-red-500': errorMessage }" placeholder="Please enter a string..."
